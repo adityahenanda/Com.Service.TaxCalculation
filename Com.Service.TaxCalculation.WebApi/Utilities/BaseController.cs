@@ -1,0 +1,108 @@
+﻿using AutoMapper;
+using Com.Service.TaxCalculation.Lib.Utilities;
+using Com.Service.TaxCalculation.Lib.Utilities.BaseClass;
+using Com.Service.TaxCalculation.Lib.Utilities.Interfaces.BaseInterfaces;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Com.Service.TaxCalculation.WebApi.Utilities
+{
+    public abstract class BaseController<TModel, TViewModel, IFacade> : Controller
+        where TModel : BaseModel
+        where TViewModel : BaseViewModel, IValidatableObject
+        where IFacade : IBaseFacade<TModel>
+    {
+        protected readonly IValidateService ValidateService;
+        protected readonly IFacade Facade;
+        protected readonly IMapper Mapper;
+        protected readonly string ApiVersion;
+
+        public BaseController(IValidateService validateService, IFacade facade, IMapper mapper, string apiVersion)
+        {
+            this.ValidateService = validateService;
+            this.Facade = facade;
+            this.Mapper = mapper;
+            this.ApiVersion = apiVersion;
+        }
+
+
+        private void ValidateViewModel(TViewModel viewModel)
+        {
+            ValidateService.Validate(viewModel);
+        }
+
+
+        [HttpPost]
+        public async Task<ActionResult> Post([FromBody] TViewModel viewModel)
+        {
+            try
+            {
+                ValidateViewModel(viewModel);
+
+                TModel model = Mapper.Map<TModel>(viewModel);
+                await Facade.CreateAsync(model);
+
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.CREATED_STATUS_CODE, Common.OK_MESSAGE)
+                    .Ok();
+                return Created(String.Concat(Request.Path, "/", 0), Result);
+            }
+            catch (ServiceValidationException e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.BAD_REQUEST_STATUS_CODE, Common.BAD_REQUEST_MESSAGE)
+                    .Fail(e);
+                return BadRequest(Result);
+            }
+            catch (Exception e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(Common.INTERNAL_ERROR_STATUS_CODE, Result);
+            }
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                TModel model = await Facade.ReadByIdAsync(id);
+
+                if (model == null)
+                {
+                    Dictionary<string, object> Result =
+                        new ResultFormatter(ApiVersion, Common.NOT_FOUND_STATUS_CODE, Common.NOT_FOUND_MESSAGE)
+                        .Fail();
+                    return NotFound(Result);
+                }
+                else
+                {
+                    TViewModel viewModel = Mapper.Map<TViewModel>(model);
+                    Dictionary<string, object> Result =
+                        new ResultFormatter(ApiVersion, Common.OK_STATUS_CODE, Common.OK_MESSAGE)
+                        .Ok<TViewModel>(viewModel);
+                    return Ok(Result);
+                }
+            }
+            catch (Exception e)
+            {
+                Dictionary<string, object> Result =
+                    new ResultFormatter(ApiVersion, Common.INTERNAL_ERROR_STATUS_CODE, e.Message)
+                    .Fail();
+                return StatusCode(Common.INTERNAL_ERROR_STATUS_CODE, Result);
+            }
+        }
+
+    }
+}
