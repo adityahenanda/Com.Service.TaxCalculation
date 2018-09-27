@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Service.TaxCalculation.Lib", "Com.Service.TaxCalculation.Lib\Com.Service.TaxCalculation.Lib.csproj", "{69CB0E38-39D8-4682-9EA6-502175F7591E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Service.TaxCalculation.WebApi", "Com.Service.TaxCalculation.WebApi\Com.Service.TaxCalculation.WebApi.csproj", "{BD0813DE-B4A8-4BDE-8CF7-1C7D917D3E41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Service.TaxCalculation.Lib", "Com.Service.TaxCalculation.Lib\Com.Service.TaxCalculation.Lib.csproj", "{69CB0E38-39D8-4682-9EA6-502175F7591E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +15,6 @@ Global
 		{69CB0E38-39D8-4682-9EA6-502175F7591E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69CB0E38-39D8-4682-9EA6-502175F7591E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69CB0E38-39D8-4682-9EA6-502175F7591E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD0813DE-B4A8-4BDE-8CF7-1C7D917D3E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD0813DE-B4A8-4BDE-8CF7-1C7D917D3E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD0813DE-B4A8-4BDE-8CF7-1C7D917D3E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD0813DE-B4A8-4BDE-8CF7-1C7D917D3E41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

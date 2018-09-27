@@ -1,5 +1,4 @@
 ﻿using Com.Service.TaxCalculation.Lib.Utilities.BaseClass;
-using Com.Service.TaxCalculation.Lib.Utilities.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
