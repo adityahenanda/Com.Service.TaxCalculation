@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace Com.Service.TaxCalculation.Lib.Facade.ProductFacade
+namespace Com.Service.TaxCalculation.Lib.Facade.Product
 {
     public class ProductViewModel : BaseViewModel, IValidatableObject
     {

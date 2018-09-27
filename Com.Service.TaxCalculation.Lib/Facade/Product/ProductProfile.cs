@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Com.Service.TaxCalculation.Lib.Facade.ProductFacade
+namespace Com.Service.TaxCalculation.Lib.Facade.Product
 {
     public class ProductProfile : Profile
     {
