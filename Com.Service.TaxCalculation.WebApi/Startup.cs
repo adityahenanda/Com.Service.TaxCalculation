@@ -2,16 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+
 using AutoMapper;
-using Com.Danliris.Service.Sales.Lib;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.Spinning;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.FinishingPrinting;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.Weaving;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.Spinning;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.FinishingPrinting;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.Weaving;
-using Com.Danliris.Service.Sales.Lib.Services;
+using Com.Service.TaxCalculation.Lib.Utilities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -19,26 +12,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json.Serialization;
-using Com.Danliris.Service.Sales.WebApi.Utilities;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.Weaving;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.Spinning;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.FinishingPrinting;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Interface.ProductionOrder;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Facades.ProductionOrder;
-using Com.Danliris.Service.Sales.Lib.BusinessLogic.Logic.ProductionOrder;
-using Com.Danliris.Service.Sales.Lib.Models.ProductionOrder;
 
-namespace Com.Danliris.Service.Sales.WebApi
+
+namespace Com.Service.TaxCalculation.WebApi
 {
     public class Startup
     {
         /* Hard Code */
         private string[] EXPOSED_HEADERS = new string[] { "Content-Disposition", "api-version", "content-length", "content-md5", "content-type", "date", "request-id", "response-time" };
-        private string SALES_POLICY = "SalesPolicy";
+        private string POLICY = "Policy";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -50,37 +33,13 @@ namespace Com.Danliris.Service.Sales.WebApi
         {
             services
                 .AddTransient<IWeavingSalesContract, WeavingSalesContractFacade>()
-                .AddTransient<ISpinningSalesContract, SpinningSalesContractFacade>()
-                .AddTransient<SpinningSalesContractReportFacade>()
-                .AddTransient<FinishingPrintingSalesContractReportFacade>()
-                .AddTransient<IFinishingPrintingSalesContract, FinishingPrintingSalesContractFacade>()
-                .AddTransient<IProductionOrder, ProductionOrderFacade>()
-                .AddTransient<WeavingSalesContractReportFacade>();
         }
 
-        private void RegisterLogic(IServiceCollection services)
-        {
-            services
-                .AddTransient<WeavingSalesContractLogic>()
-                .AddTransient<SpinningSalesContractLogic>()
-                .AddTransient<FinishingPrintingSalesContractLogic>()
-                .AddTransient<FinishingPrintingSalesContractDetailLogic>()
-                .AddTransient<ProductionOrder_DetailLogic>()
-                .AddTransient<ProductionOrder_LampStandardLogic>()
-                .AddTransient<ProductionOrder_RunWidthLogic>()
-                .AddTransient<ProductionOrderLogic>();
-        }
 
         private void RegisterServices(IServiceCollection services)
         {
             services
-                .AddScoped<IIdentityService,IdentityService>()
                 .AddScoped<IValidateService,ValidateService>();
-        }
-
-        private void RegisterEndpoint()
-        {
-            APIEndpoint.Core = Configuration.GetValue<string>("CoreEndpoint") ?? Configuration["CoreEndpoint"];
         }
 
 
@@ -93,34 +52,17 @@ namespace Com.Danliris.Service.Sales.WebApi
             string connectionString = Configuration.GetConnectionString("DefaultConnection") ?? Configuration["DefaultConnection"];
 
             /* Register */
-            services.AddDbContext<SalesDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<DbContext>(options => options.UseSqlServer(connectionString));
             RegisterFacades(services);
-            RegisterLogic(services);
             RegisterServices(services);
-            RegisterEndpoint();
             services.AddAutoMapper();
 
             /* Versioning */
             services.AddApiVersioning(options => { options.DefaultApiVersion = new ApiVersion(1, 0); });
 
-            /* Authentication */
-            string Secret = Configuration.GetValue<string>("Secret") ?? Configuration["Secret"];
-            SymmetricSecurityKey Key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Secret));
-
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = false,
-                        ValidateIssuer = false,
-                        ValidateLifetime = false,
-                        IssuerSigningKey = Key
-                    };
-                });
-
+           
             /* CORS */
-            services.AddCors(options => options.AddPolicy(SALES_POLICY, builder =>
+            services.AddCors(options => options.AddPolicy(POLICY, builder =>
             {
                 builder.AllowAnyOrigin()
                        .AllowAnyMethod()
@@ -147,12 +89,12 @@ namespace Com.Danliris.Service.Sales.WebApi
             /* Update Database */
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                SalesDbContext context = serviceScope.ServiceProvider.GetService<SalesDbContext>();
+                DbContext context = serviceScope.ServiceProvider.GetService<DbContext>();
                 context.Database.Migrate();
             }
 
             app.UseAuthentication();
-            app.UseCors(SALES_POLICY);
+            app.UseCors(POLICY);
             app.UseMvc();
         }
     }
