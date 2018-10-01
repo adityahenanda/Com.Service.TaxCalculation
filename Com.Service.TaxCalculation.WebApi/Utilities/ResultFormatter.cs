@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
 
 namespace Com.Service.TaxCalculation.WebApi.Utilities
 {
@@ -18,18 +19,6 @@ namespace Com.Service.TaxCalculation.WebApi.Utilities
             Result = new Dictionary<string, object>();
             AddResponseInformation(Result, ApiVersion, StatusCode, Message);
         }
-
-        public Dictionary<string, object> Ok()
-        {
-            return Result;
-        }
-
-        public Dictionary<string, object> Ok<TViewModel>(TViewModel Data)
-        {
-            Result.Add("data", Data);
-            return Result;
-        }
-
 
         public Dictionary<string, object> Ok<TViewModel>(IMapper mapper, List<TViewModel> Data, int Page, int Size, int TotalData, int TotalPageData, Dictionary<string, string> Order, List<string> Select)
         {
@@ -58,15 +47,20 @@ namespace Com.Service.TaxCalculation.WebApi.Utilities
             return Result;
         }
 
-        public Dictionary<string, object> Fail(string Error)
+        public Dictionary<string, object> Ok<TViewModel>(IMapper mapper, TViewModel Data)
         {
-            Result.Add("error", Error);
+            Result.Add("data", Data);
+
+            return Result;
+        }
+
+        public Dictionary<string, object> Ok()
+        {
             return Result;
         }
 
         public Dictionary<string, object> Fail()
         {
-            Result.Add("error", "Request Failed");
             return Result;
         }
 

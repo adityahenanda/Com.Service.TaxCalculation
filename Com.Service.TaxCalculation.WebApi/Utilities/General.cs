@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Com.Service.TaxCalculation.WebApi.Utilities
 {
-    public static class Common
+    public class General
     {
         public const int OK_STATUS_CODE = 200;
         public const int CREATED_STATUS_CODE = 201;

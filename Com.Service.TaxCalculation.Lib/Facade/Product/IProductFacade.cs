@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Com.Service.TaxCalculation.Lib.Facade.Product
 {
-    interface IProductFacade : IBaseFacade<ProductModel>
+    public interface IProductFacade : IBaseFacade<ProductModel>
     {
     }
 }
