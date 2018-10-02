@@ -28,7 +28,7 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
             return await DbContext.SaveChangesAsync();
         }
 
-        public ReadResponse<ProductModel> Read(int page, int size, List<string> select, string keyword, string filter)
+        public ReadResponse<ProductModel> Read(int page, int size, string order, List<string> select, string keyword, string filter)
         {
             IQueryable<ProductModel> query = DbSet;
 
@@ -43,7 +43,7 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
 
             List<string> selectedFields = new List<string>()
                 {
-                    "Id","Name","TaxCode","Type"
+                    "Id","Name","TaxCode","Type","CreatedUtc"
                 };
 
             query = query
@@ -53,9 +53,10 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
                         Name = field.Name,
                         TaxCode = field.TaxCode,
                         Type = field.Type,
-
+                        CreatedUtc=field.CreatedUtc,
                     });
-
+            Dictionary<string, string> orderDictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(order);
+            query = QueryHelper<ProductModel>.Order(query, orderDictionary);
 
             Pageable<ProductModel> pageable = new Pageable<ProductModel>(query, page - 1, size);
             List<ProductModel> data = pageable.Data.ToList();

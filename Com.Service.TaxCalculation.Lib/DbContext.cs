@@ -1,5 +1,6 @@
 ﻿using Com.Moonlay.Data.EntityFrameworkCore;
 using Com.Service.TaxCalculation.Lib.Facade.Product;
+using Com.Service.TaxCalculation.Lib.Facade.TaxCalculation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Com.Service.TaxCalculation.Lib
@@ -10,5 +11,7 @@ namespace Com.Service.TaxCalculation.Lib
         {
         }
         public DbSet<ProductModel> Product { get; set; }
+        public DbSet<TaxCalculationDetailsModel> TaxCalculationDetails { get; set; }
+        public DbSet<TaxCalculationModel> TaxCalculation { get; set; }
     }
 }

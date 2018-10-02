@@ -58,5 +58,25 @@ namespace Com.Service.TaxCalculation.Lib.Utilities
             }
             return query;
         }
+
+        public static IQueryable<TModel> Order(IQueryable<TModel> query, Dictionary<string, string> orderDictionary)
+        {
+            /* Default Order */
+            if (orderDictionary.Count.Equals(0))
+            {
+                orderDictionary.Add("CreatedUtc", "desc");
+
+                query = query.OrderByDescending(b => b.CreatedUtc);
+            }
+            /* Custom Order */
+            else
+            {
+                string Key = orderDictionary.Keys.First();
+                string OrderType = orderDictionary[Key];
+
+                query = query.OrderBy(string.Concat(Key.Replace(".", ""), " ", OrderType));
+            }
+            return query;
+        }
     }
 }

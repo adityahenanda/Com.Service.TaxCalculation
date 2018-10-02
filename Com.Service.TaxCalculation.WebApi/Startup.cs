@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Com.Service.TaxCalculation.Lib;
 using Com.Service.TaxCalculation.Lib.Facade.Product;
+using Com.Service.TaxCalculation.Lib.Facade.TaxCalculation;
 using Com.Service.TaxCalculation.Lib.Utilities;
 using Com.Service.TaxCalculation.WebApi.Utilities;
 using Microsoft.AspNetCore.Builder;
@@ -40,7 +41,8 @@ namespace Com.Service.TaxCalculation.WebApi
         private void RegisterFacades(IServiceCollection services)
         {
             services
-                .AddTransient<IProductFacade, ProductFacade>();
+                .AddTransient<IProductFacade, ProductFacade>()
+                .AddTransient<ITaxCalculationFacade, TaxCalculationFacade>();
         }
 
 
