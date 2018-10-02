@@ -90,7 +90,7 @@ namespace Com.Service.TaxCalculation.Lib.Facade.TaxCalculation
             List<TaxCalculationModel> data = pageable.Data.ToList();
             int totalData = pageable.TotalCount;
 
-            return new ReadResponse<TaxCalculationModel>(data, totalData, selectedFields);
+            return new ReadResponse<TaxCalculationModel>(data, totalData, orderDictionary, selectedFields);
         }
 
         public async Task<TaxCalculationModel> ReadByIdAsync(int id)

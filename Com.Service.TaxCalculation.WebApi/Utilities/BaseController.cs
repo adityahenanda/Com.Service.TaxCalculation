@@ -94,11 +94,11 @@ namespace Com.Service.TaxCalculation.WebApi.Utilities
         }
 
         [HttpGet]
-        public IActionResult Get(int page = 1, int size = 25, [Bind(Prefix = "Select[]")]List<string> select = null, string keyword = null, string filter = "{}")
+        public IActionResult Get(int page = 1, int size = 25, string order = "{}", [Bind(Prefix = "Select[]")]List<string> select = null, string keyword = null, string filter = "{}")
         {
             try
             {
-                ReadResponse<TModel> read = Facade.Read(page, size, select, keyword, filter);
+                ReadResponse<TModel> read = Facade.Read(page, size, order, select, keyword, filter);
 
                 List<TViewModel> dataVM = Mapper.Map<List<TViewModel>>(read.Data);
 

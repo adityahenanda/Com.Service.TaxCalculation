@@ -10,10 +10,11 @@ namespace Com.Service.TaxCalculation.Lib.Utilities
         public int Count { get; set; }
         public Dictionary<string, string> Order { get; set; }
         public List<string> Selected { get; set; }
-        public ReadResponse(List<TModel> data, int count, List<string> selected)
+        public ReadResponse(List<TModel> data, int count, Dictionary<string, string> order, List<string> selected)
         {
             this.Data = data;
             this.Count = count;
+            this.Order = order;
             this.Selected = selected;
         }
     }

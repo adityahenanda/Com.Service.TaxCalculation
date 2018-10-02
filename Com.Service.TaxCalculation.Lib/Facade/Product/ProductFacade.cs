@@ -62,7 +62,7 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
             List<ProductModel> data = pageable.Data.ToList();
             int totalData = pageable.TotalCount;
 
-            return new ReadResponse<ProductModel>(data, totalData, selectedFields);
+            return new ReadResponse<ProductModel>(data, totalData, orderDictionary, selectedFields);
         }
 
         public async Task<ProductModel> ReadByIdAsync(int id)

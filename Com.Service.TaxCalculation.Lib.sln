@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Service.TaxCalculation.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Com.Service.TaxCalculation.WebApi", "Com.Service.TaxCalculation.WebApi\Com.Service.TaxCalculation.WebApi.csproj", "{14D25C85-EC0C-4CCA-A4A1-A94CC69DA45A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Com.Service.TaxCalculation.Test", "Com.Service.TaxCalculation.Test\Com.Service.TaxCalculation.Test.csproj", "{0350EDF9-2D61-4231-B831-D8766AB59572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{14D25C85-EC0C-4CCA-A4A1-A94CC69DA45A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14D25C85-EC0C-4CCA-A4A1-A94CC69DA45A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14D25C85-EC0C-4CCA-A4A1-A94CC69DA45A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0350EDF9-2D61-4231-B831-D8766AB59572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0350EDF9-2D61-4231-B831-D8766AB59572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0350EDF9-2D61-4231-B831-D8766AB59572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0350EDF9-2D61-4231-B831-D8766AB59572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
