@@ -14,8 +14,6 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (string.IsNullOrEmpty(this.Type))
-                yield return new ValidationResult("is required", new List<string> { "Type" });
 
             if (string.IsNullOrEmpty(this.Name))
                 yield return new ValidationResult("is required", new List<string> { "Name" });

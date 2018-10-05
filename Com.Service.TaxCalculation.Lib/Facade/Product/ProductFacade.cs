@@ -1,4 +1,5 @@
-﻿using Com.Service.TaxCalculation.Lib.Utilities;
+﻿using Com.Service.TaxCalculation.Lib.Facade.TaxCalculation;
+using Com.Service.TaxCalculation.Lib.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using System;
@@ -23,6 +24,7 @@ namespace Com.Service.TaxCalculation.Lib.Facade.Product
 
         public async Task<int> CreateAsync(ProductModel model)
         {
+            model.Type = TaxCalculationExtension.generateType(model.TaxCode);
             EntityExtension.FlagForCreate(model, "admin");
             DbSet.Add(model);
             return await DbContext.SaveChangesAsync();

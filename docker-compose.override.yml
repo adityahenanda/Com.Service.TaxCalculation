@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  com.service.taxcalculation.webapi:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=mssql;Database=Danrilies.Db.Dev;User Id=sa;password=Standar123.
+    ports:
+      - "5055:80"
+
+  mssql:
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Standar123.
+      - MSSQL_PID=Developer
+    ports:
+      - "1401:1433"

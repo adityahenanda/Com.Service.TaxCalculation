@@ -29,7 +29,6 @@ namespace Com.Service.TaxCalculation.Lib.Facade.TaxCalculation
 
             foreach (TaxCalculationDetailsModel item in model.Details)
             {
-                item.Type = TaxCalculationExtension.generateType(item.TaxCode);
                 item.TaxAmount = TaxCalculationExtension.generateTaxAmount(item.TaxCode, item);
                 item.Total = item.Amount + item.TaxAmount;
 
