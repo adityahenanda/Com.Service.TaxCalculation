@@ -4,7 +4,9 @@
 
 
 1.USAGE:
+
 	*run docker apps.
+	
 	*download this repository and then open in cmd :
 		*Input docker command : docker-compose -f docker-compose.test.yml docker-compose.override.yml up -d
 		*after downloading image complete input docker command: docker build
@@ -17,6 +19,7 @@
 
 
 2.PROJECT:
+
 	*Com.Service.TaxCalculation.Lib
 		*modules for bussiness process : product facade and taxCalculation facade
 
@@ -28,6 +31,7 @@
 
 
 3.API DOCUMENTATION:
+
 	*endpoint:http://localhost:5055/v1/
 	
 	*Product WebApi service:
@@ -81,5 +85,6 @@
 
 4.DB
 	*have 2 table:
+	
 		1.Product:stores master product
 		2.TaxCalculation:stores history transaction (tax calculation)
