@@ -9,7 +9,7 @@
 	
 	*download this repository and then open in cmd :
 		*Input docker command : docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
-		*after downloading image complete input docker command: docker build
+		*after downloading image complete,build image input docker command: docker-compose -f docker-compose.test.yml up -d
 
 	*alternate option : 
 		*open Com.Service.TaxCalculation.Lib.sln using visual studio code 2017 or above
