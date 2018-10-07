@@ -50,7 +50,7 @@
 			*GET (get data by id) : http://localhost:5055/v1/product/id
 				*example: http://localhost:5055/v1/product/1
 
-	*Product WebApi service:
+	*TaxCalculation WebApi service:
 		*uri:tax-calculation
 		*service: endpoint/uri : http://localhost:5055/v1/tax-calculation
 		*usage:  
