@@ -8,7 +8,7 @@
 	*run docker apps.
 	
 	*download this repository and then open in cmd :
-		*Input docker command : docker-compose -f docker-compose.test.yml docker-compose.override.yml up -d
+		*Input docker command : docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 		*after downloading image complete input docker command: docker build
 
 	*alternate option : 
