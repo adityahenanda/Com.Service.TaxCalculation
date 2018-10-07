@@ -24,7 +24,7 @@
 		*modules for bussiness process : product facade and taxCalculation facade
 
 	*Com.Service.TaxCalculation.Test
-		*uni test for controller using moq : product facade and 
+		*uni test for controller using moq : product facade and taxCalculation facade
 
 	*Com.Service.TaxCalculation.WebApi
 		*WebApi controller for each facade : product controller and taxCalculation controller
@@ -37,7 +37,7 @@
 	*Product WebApi service:
 		*uri:product
 		*service: endpoint/uri : http://localhost:5055/v1/product
-		*usage:  
+		*usage:   http://localhost:5055/v1/product
 			*POST example (properties: Name (string), TaxCode(int) accept JSON:
 			
 				{
@@ -53,7 +53,7 @@
 	*TaxCalculation WebApi service:
 		*uri:tax-calculation
 		*service: endpoint/uri : http://localhost:5055/v1/tax-calculation
-		*usage:  
+		*usage:   http://localhost:5055/v1/tax-calculation
 			*POST example :
 				(properties: TotalAmount(default 0), 
 				             TotalTaxAmount(default 0),
