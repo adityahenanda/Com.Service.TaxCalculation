@@ -3,7 +3,7 @@
 *REQUIREMENT: DOCKER
 
 
-1.USAGE:
+1.USAGE for docker:
 
 	*run docker apps.
 	
