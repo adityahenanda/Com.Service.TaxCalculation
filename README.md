@@ -84,7 +84,9 @@
 				*example: http://localhost:5055/v1/tax-calculation/1
 
 4.DB
-	*have 2 table:
 	
 		1.Product:stores master product
+			*table Product
 		2.TaxCalculation:stores history transaction (tax calculation)
+			*header : table taxCalculation
+			*deatil : table TaxCalculationDetails
