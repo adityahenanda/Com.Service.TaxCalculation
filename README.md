@@ -14,23 +14,9 @@
 	*alternate option : 
 		*open Com.Service.TaxCalculation.Lib.sln using visual studio code 2017 or above
 		*right click on docker-compose "set as startup project" and then press start button
-				
 
 
-
-2.PROJECT:
-
-	*Com.Service.TaxCalculation.Lib
-		*modules for bussiness process : product facade and taxCalculation facade
-
-	*Com.Service.TaxCalculation.Test
-		*uni test for controller using moq : product facade and taxCalculation facade
-
-	*Com.Service.TaxCalculation.WebApi
-		*WebApi controller for each facade : product controller and taxCalculation controller
-
-
-3.API DOCUMENTATION:
+2.API DOCUMENTATION:
 
 	*endpoint:http://localhost:5055/v1/
 	
@@ -83,10 +69,3 @@
 			*GET (get data by id) : http://localhost:5055/v1/tax-calculation/id
 				*example: http://localhost:5055/v1/tax-calculation/1
 
-4.DB
-	
-		1.Product:stores master product
-			*table Product
-		2.TaxCalculation:stores history transaction (tax calculation)
-			*header : table taxCalculation
-			*deatil : table TaxCalculationDetails
